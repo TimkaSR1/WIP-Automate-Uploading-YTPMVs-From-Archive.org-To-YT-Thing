@@ -28,8 +28,8 @@ $yt -o "$viddir/%(title)s/%(title)s [%(creator)s]" $linke
 
 cp description_template.txt $viddir/$title/$title-metadata.txt
 
-sed -i "s/replace_with_link/$webpageurl/g" $viddir/$title/$title-metadata.txt
+sed -i "s/replace_with_link/$webpageurl/g" "$viddir/$title/$title-metadata.txt"
 
-sed -i "s/replace_with_date/$formatteddate_2/g" $viddir/$title/$title-metadata.txt
+sed -i "s/replace_with_date/$formatteddate_2/g" "$viddir/$title/$title-metadata.txt"
 
-sed -i "s/replace_with_description/$description/g" $viddir/$title/$title-metadata.txt
+sed -i "s/replace_with_description/$description/g" "$viddir/$title/$title-metadata.txt"
