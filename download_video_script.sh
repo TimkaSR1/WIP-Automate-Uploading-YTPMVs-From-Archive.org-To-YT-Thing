@@ -26,4 +26,4 @@ formatteddate_2=$(echo '[$formatteddate_1]' | awk -F'[][/: ]' 'BEGIN{split("Janu
 
 $yt -o "$viddir/%(title)s/%(title)s [%(creator)s]" $linke
 
-sed 's/replace_with_link/$webpage_url/g' description_template.txt > $title-metadata.txt
+cp description_template.txt $viddir/$title/$title-metadata.txt
