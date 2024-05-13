@@ -26,6 +26,10 @@ desc_file=$(echo $video_dir/$title-metadata.txt)
 
 # creating description
 
+mkdir -p "$video_dir"
+
+touch "$desc_file"
+
 echo -e "Archive.org link:" >> "$desc_file"
 
 echo -e "$url\n" >> "$desc_file"
@@ -41,7 +45,5 @@ echo -e "$desc" >> "$desc_file"
 sed -i -e "s@https://@@" "$desc_file"
 
 # download the video
-
-mkdir -p "$video_dir"
 
 yt-dlp -f b -o "$video_dir/$title [$creator]" $link
