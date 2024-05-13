@@ -1,9 +1,8 @@
 Requirements:
-- Python 3+
-- Pip
-- Any DE
-- Chromium/Chrome WebDriver
+- yt-dlp
 
-Needed pip modules:
-yt-dlp (For downloading videos and extracting metadata)
-Selenium (For making lists of videos and to automatically upload videos to YouTube)
+To-do:
+Make it automatically make lists of videos
+Make it download videos from a list
+Make it upload the videos to youtube automatically
+Um i forgor
