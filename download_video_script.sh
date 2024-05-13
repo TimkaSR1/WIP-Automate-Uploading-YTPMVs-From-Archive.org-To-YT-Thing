@@ -1,35 +1,47 @@
-echo put yt-dlp bin dir
+echo insert archive.org link
 
-read yt
+read link
 
-echo put the dir you want to save the video in
+echo insert dir to save the video in
 
-read viddir
+read dir
 
-echo put archive.org linke
+# getting variables
 
-read linke
+title=$(yt-dlp --print title $link)
 
-title=$($yt --print title $linke) 
+desc=$(yt-dlp --print description $link)
 
-creator=$($yt --print creator $linke) 
+creator=$(yt-dlp --print creator $link)
 
-description=$($yt --print description $linke) 
+rel_date=$(yt-dlp --print "%(release_date>%d/%m/%Y)s" $link)
 
-rel_date=$($yt --print release_date $linke)
+format_date=$(echo [$rel_date] | awk -F'[][/: ]' 'BEGIN{split("January February March April May June July August September October November December",m,/ /)} {print m[$3+0],$2",",$4}')
 
-webpageurl=$($yt --print webpage_url $linke)
+url=$(yt-dlp --print webpage_url $link)
 
-formatteddate_1=$(date -d "$rel_date" +"%d/%m/%Y")
+video_dir=$(echo $dir/$creator/$title)
 
-formatteddate_2=$(echo '[$formatteddate_1]' | awk -F'[][/: ]' 'BEGIN{split("January February March April May June July August September October November December",m,/ /)} {print m[$3+0],$2",",$4}')
+desc_file=$(echo $video_dir/$title-metadata.txt)
 
-$yt -o "$viddir/%(title)s/%(title)s [%(creator)s]" $linke
+# creating description
 
-cp description_template.txt $viddir/$title/$title-metadata.txt
+echo -e "Archive.org link:" >> "$desc_file"
 
-sed -i "s/replace_with_link/$webpageurl/g" "$viddir/$title/$title-metadata.txt"
+echo -e "$url\n" >> "$desc_file"
 
-sed -i "s/replace_with_date/$formatteddate_2/g" "$viddir/$title/$title-metadata.txt"
+echo -e "Upload date:" >> "$desc_file"
 
-sed -i "s/replace_with_description/$description/g" "$viddir/$title/$title-metadata.txt"
+echo -e "$format_date\n" >> "$desc_file"
+
+echo -e "Description:" >> "$desc_file"
+
+echo -e "$desc" >> "$desc_file"
+
+sed -i -e "s@https://@@" "$desc_file"
+
+# download the video
+
+mkdir -p "$video_dir"
+
+yt-dlp -f b -o "$video_dir/$title [$creator]" $link
