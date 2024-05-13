@@ -1,8 +1,0 @@
-Archive.org link:
-replace_with_link
-
-Upload date:
-replace_with_date
-
-Description:
-replace_with_description
