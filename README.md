@@ -1,4 +1,6 @@
-I'mRequirements:
+This project is only works in Linux
+
+Requirements:
 - yt-dlp
 
 To-do:
