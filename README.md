@@ -1,4 +1,4 @@
-This project is only works in Linux
+This project only works in Linux
 
 Requirements:
 - yt-dlp
